@@ -36,3 +36,10 @@ TEST_F(TestClass, testExample4) {
   vector<int> input{4, 7, 4};
   ASSERT_EQ(3, s.smallestRangeII(input, 4));
 }
+
+//------------------------------------------------------------------------------
+TEST_F(TestClass, testExample5) {
+  Solution s;
+  vector<int> input{2, 7, 2};
+  ASSERT_EQ(3, s.smallestRangeII(input, 1));
+}

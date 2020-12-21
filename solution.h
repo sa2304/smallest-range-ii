@@ -12,33 +12,14 @@ class Solution {
 public:
   /** TODO */
   int smallestRangeII(vector<int>& A, int K) {
-    const size_t count = A.size();
-    double avg = accumulate(A.begin(), A.end(), 0.0, [count](const int& avg, const int& element) {
-      return avg + static_cast<double>(element) / count;
-    });
-
-    clog << "Average: " << avg << "\n";
-
-    set<int> B(A.begin(), A.end());
-
-    auto iter_median = B.begin();
-    advance(iter_median, B.size()/2);
-    int median = *iter_median;
-
-    set<int> c;
-    for (int element : B) {
-      if (element < median) {
-        element += K;
-      } else {
-        element -= K;
-      }
-
-      c.insert(element);
+    set<int> b;
+    for (int number : A) {
+      int addK = number + K;
+      int subK = number - K;
+      b.insert(min(abs(addK), abs(subK)));
     }
 
-    clog << "Median: " << median << endl;
-
-    return abs(*c.begin() - *prev(c.end()));
+    return abs(*b.begin() - *prev(b.end()));
   }
 };
 
