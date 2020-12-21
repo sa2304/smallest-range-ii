@@ -19,24 +19,26 @@ public:
 
     clog << "Average: " << avg << "\n";
 
-    set<int> B;
-    clog << "B: [ ";
-    for (int number : A) {
-      const int element = (number <= avg)
-          ? number + K
-          : number - K;
-      B.insert( element );
-      clog << element << " ";
-    }
-    clog << "]\n";
+    set<int> B(A.begin(), A.end());
 
-    const int min = *B.begin();
-    clog << "min = " << min << "\n";
-    const int max = *prev(B.end());
-    clog << "max = " << max << "\n";
-    const int diff = abs((min) - abs(max));
-    clog << "Diff = " << diff << "\n";
-    return diff;
+    auto iter_median = B.begin();
+    advance(iter_median, B.size()/2);
+    int median = *iter_median;
+
+    set<int> c;
+    for (int element : B) {
+      if (element < median) {
+        element += K;
+      } else {
+        element -= K;
+      }
+
+      c.insert(element);
+    }
+
+    clog << "Median: " << median << endl;
+
+    return abs(*c.begin() - *prev(c.end()));
   }
 };
 
