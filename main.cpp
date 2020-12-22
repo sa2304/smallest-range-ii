@@ -6,6 +6,8 @@ using namespace std;
 
 int main()
 {
-    cout << "Hello World!" << endl;
+  Solution s;
+  vector<int> input{1, 3, 6};
+  cout << s.smallestRangeII(input, 3) << endl;
     return 0;
 }

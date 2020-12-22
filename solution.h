@@ -10,16 +10,20 @@ using namespace std;
 
 class Solution {
 public:
-  /** TODO */
   int smallestRangeII(vector<int>& A, int K) {
-    set<int> b;
-    for (int number : A) {
-      int addK = number + K;
-      int subK = number - K;
-      b.insert(min(abs(addK), abs(subK)));
+    set<int> numbers(A.begin(), A.end());
+    int amin = *numbers.begin();
+    int amax = *prev(numbers.end());
+    int smallest_distnace = abs(amax - amin);
+    for (auto iter = numbers.begin(); next(iter) != numbers.end(); ++iter) {
+      int smaller = *iter;
+      int greater = *next(iter);
+      int low = min(amin + K, greater - K);
+      int high = max(amax - K, smaller + K);
+      smallest_distnace = min(smallest_distnace, abs(high - low));
     }
 
-    return abs(*b.begin() - *prev(b.end()));
+    return smallest_distnace;
   }
 };
 
